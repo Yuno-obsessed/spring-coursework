@@ -1,0 +1,12 @@
+INSERT INTO public.pet_diagnosis (diagnosis_id, pet_id, description, date) VALUES (1, 1, 'some disease', CURRENT_DATE);
+INSERT INTO public.pet_diagnosis (diagnosis_id, pet_id, description, date) VALUES (22, 1, 'some disease', CURRENT_DATE - INTERVAL '1 month');
+INSERT INTO public.pet_diagnosis (diagnosis_id, pet_id, description, date) VALUES (22, 1, 'some disease', CURRENT_DATE - INTERVAL '8 days');
+INSERT INTO public.pet_diagnosis (diagnosis_id, pet_id, description, date) VALUES (23, 1, 'some disease', CURRENT_DATE - INTERVAL '9 days');
+INSERT INTO public.pet_diagnosis (diagnosis_id, pet_id, description, date) VALUES (23, 1, 'some disease', CURRENT_DATE - INTERVAL '14 days');
+INSERT INTO public.pet_diagnosis (diagnosis_id, pet_id, description, date) VALUES (1, 1, 'some disease', CURRENT_DATE);
+INSERT INTO public.pet_diagnosis (diagnosis_id, pet_id, description, date) VALUES (1, 1, 'some disease', CURRENT_DATE);
+INSERT INTO public.pet_diagnosis (diagnosis_id, pet_id, description, date) VALUES (1, 1, 'some disease', CURRENT_DATE);
+INSERT INTO public.pet_diagnosis (diagnosis_id, pet_id, description, date) VALUES (1, 1, 'some disease', CURRENT_DATE);
+INSERT INTO public.pet_diagnosis (diagnosis_id, pet_id, description, date) VALUES (1, 1, 'some disease', CURRENT_DATE);
+INSERT INTO public.pet_diagnosis (diagnosis_id, pet_id, description, date) VALUES (1, 1, 'some disease', CURRENT_DATE);
+INSERT INTO public.pet_diagnosis (diagnosis_id, pet_id, description, date) VALUES (1, 1, 'some disease', CURRENT_DATE);
