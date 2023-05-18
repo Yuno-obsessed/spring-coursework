@@ -79,3 +79,4 @@ fabric.properties
 .env
 /.idea
 /db-data
+/backend/target
