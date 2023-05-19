@@ -4,6 +4,7 @@ import com.sanity.nil.dto.request.PetRequest;
 import com.sanity.nil.dto.request.TypeSetRequest;
 import com.sanity.nil.dto.response.ApiResponse;
 import com.sanity.nil.dto.response.CommandResponse;
+import com.sanity.nil.dto.response.PetInfoResponse;
 import com.sanity.nil.dto.response.PetResponse;
 import com.sanity.nil.service.PetService;
 import jakarta.validation.Valid;
@@ -41,6 +42,19 @@ public class PetController {
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<PetResponse>> findById(@PathVariable long id) {
         final PetResponse response = petService.findById(id);
+        return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
+    }
+
+    /**
+     * Fetches a single pet detailed info by the given id
+     *
+     * @param id
+     * @return PetInfoResponse
+     */
+    @PreAuthorize("hasRole(T(com.sanity.nil.model.RoleType).ROLE_USER)")
+    @GetMapping("/info/{id}")
+    public ResponseEntity<ApiResponse<PetInfoResponse>> getDetailedById(@PathVariable long id) {
+        final PetInfoResponse response = petService.getInfoById(id);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
     }
 

@@ -29,6 +29,7 @@ public final class Constants {
     public static final String NOT_FOUND_USER = "Requested user is not found";
     public static final String NOT_FOUND_ANALYSIS = "Requested analysis is not found";
     public static final String NOT_FOUND_DIAGNOSIS = "Requested diagnosis is not found";
+    public static final String NOT_FOUND_SURGERY = "Requested surgery is not found";
     public static final String NOT_FOUND_USERNAME = "User with username of {0} is not found";
     public static final String ALREADY_EXISTS = "Requested element is already exists";
     public static final String ALREADY_EXISTS_TYPE = "Type with the same name is already exists";
@@ -38,14 +39,17 @@ public final class Constants {
     public static final String CREATED_USER = "User is created";
     public static final String CREATED_ANALYSIS = "Analysis is created";
     public static final String CREATED_DIAGNOSIS = "Diagnosis is created";
+    public static final String CREATED_SURGERY = "Surgery is created";
     public static final String UPDATED_TYPE = "Type is updated";
     public static final String UPDATED_PET = "Pet is updated";
     public static final String UPDATED_USER = "User is updated";
     public static final String UPDATED_ANALYSIS = "Analysis is updated";
     public static final String UPDATED_DIAGNOSIS = "Diagnosis is updated";
+    public static final String UPDATED_SURGERY = "Surgery is updated";
     public static final String DELETED_TYPE = "Type is deleted";
     public static final String DELETED_PET = "Pet is deleted";
     public static final String DELETED_ANALYSIS = "Analysis is deleted";
     public static final String DELETED_DIAGNOSIS = "Diagnosis is deleted";
+    public static final String DELETED_SURGERY = "Surgery is deleted";
 
 }

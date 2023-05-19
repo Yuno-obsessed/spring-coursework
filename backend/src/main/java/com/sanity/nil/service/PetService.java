@@ -5,9 +5,12 @@ import com.sanity.nil.dto.mapper.PetResponseMapper;
 import com.sanity.nil.dto.request.PetRequest;
 import com.sanity.nil.dto.request.TypeSetRequest;
 import com.sanity.nil.dto.response.CommandResponse;
+import com.sanity.nil.dto.response.PetInfoResponse;
 import com.sanity.nil.dto.response.PetResponse;
 import com.sanity.nil.exception.NoSuchElementFoundException;
 import com.sanity.nil.model.Pet;
+import com.sanity.nil.repository.AnalysisRepository;
+import com.sanity.nil.repository.DiagnosisRepository;
 import com.sanity.nil.repository.PetRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +34,8 @@ import static com.sanity.nil.common.Constants.*;
 public class PetService {
 
     private final PetRepository petRepository;
+    private final DiagnosisRepository diagnosisRepository;
+    private final AnalysisRepository analysisRepository;
     private final TypeService typeService;
     private final UserService userService;
     private final PetRequestMapper petRequestMapper;
@@ -78,6 +83,23 @@ public class PetService {
         if (pets.isEmpty())
             throw new NoSuchElementFoundException(NOT_FOUND_RECORD);
         return pets;
+    }
+
+    /**
+     * Fetches a detailed pet info by the given id
+     *
+     * @param id
+     * @return PetInfoResponse
+     */
+    public PetInfoResponse getInfoById(Long id) {
+        Pet pet = petRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementFoundException());
+        return PetInfoResponse.builder()
+                .name(pet.getName())
+                .type(pet.getType())
+                .diagnosis(diagnosisRepository.findAllByPetId(id))
+                .analysis(analysisRepository.findAllByPetId(id))
+                .build();
     }
 
     /**
