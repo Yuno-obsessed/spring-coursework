@@ -77,7 +77,7 @@ CREATE TABLE public.surgery
     surgery_id BIGINT NOT NULL,
     pet_id BIGINT NOT NULL,
     user_id BIGINT NOT NULL,
-    description VARCHAR(100) NOT NULL,
+    description VARCHAR(50) NOT NULL,
     difficulty SMALLINT DEFAULT 1,
     "date" DATE NOT NULL,
     CONSTRAINT pk_surgery PRIMARY KEY (surgery_id)
@@ -105,13 +105,13 @@ ALTER TABLE public.user_role
     ADD CONSTRAINT fk_user_role_on_user FOREIGN KEY (user_id) REFERENCES public."user" (id);
 
 ALTER TABLE pet_diagnosis
-    ADD CONSTRAINT fk_pet_diagnosis_on_pet FOREIGN KEY (diagnosis_id) REFERENCES pet (id) ON DELETE CASCADE;
+    ADD CONSTRAINT fk_pet_diagnosis_on_pet FOREIGN KEY (pet_id) REFERENCES pet (id) ON DELETE CASCADE;
 
 ALTER TABLE pet_analysis
-    ADD CONSTRAINT fk_pet_analysis_on_pet FOREIGN KEY (analysis_id) REFERENCES pet (id) ON DELETE CASCADE;
+    ADD CONSTRAINT fk_pet_analysis_on_pet FOREIGN KEY (pet_id) REFERENCES pet (id) ON DELETE CASCADE;
 
 ALTER TABLE surgery
     ADD CONSTRAINT fk_surgery_on_pet FOREIGN KEY (pet_id) REFERENCES pet (id) ON DELETE CASCADE;
 
 ALTER TABLE surgery
-    ADD CONSTRAINT fk_surgery_on_user FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE;
+    ADD CONSTRAINT fk_surgery_on_user FOREIGN KEY (user_id) REFERENCES public."user" (id) ON DELETE CASCADE;

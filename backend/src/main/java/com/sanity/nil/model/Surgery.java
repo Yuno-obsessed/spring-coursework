@@ -26,12 +26,13 @@ public class Surgery {
     )
     private Long id;
 
-    @Column(length = 50, nullable = false)
-    private Long petId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pet_id", referencedColumnName = "id", nullable = false)
+    private Pet pet;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private User user;
 
     private String description;
 
@@ -39,7 +40,4 @@ public class Surgery {
 
     private Date date;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-//    private User user;
 }

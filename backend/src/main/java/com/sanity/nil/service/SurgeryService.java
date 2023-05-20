@@ -1,35 +1,19 @@
 package com.sanity.nil.service;
 
-import com.sanity.nil.dto.mapper.SurgeryPetResponseMapper;
 import com.sanity.nil.dto.mapper.SurgeryRequestMapper;
-import com.sanity.nil.dto.mapper.SurgeryUserResponseMapper;
-import com.sanity.nil.dto.request.ProfileRequest;
+import com.sanity.nil.dto.mapper.SurgeryResponseMapper;
 import com.sanity.nil.dto.request.SurgeryRequest;
-import com.sanity.nil.dto.request.UserRequest;
 import com.sanity.nil.dto.response.CommandResponse;
-import com.sanity.nil.dto.response.SurgeryPetResponse;
-import com.sanity.nil.dto.response.SurgeryUserResponse;
-import com.sanity.nil.dto.response.UserResponse;
-import com.sanity.nil.exception.ElementAlreadyExistsException;
+import com.sanity.nil.dto.response.SurgeryResponse;
 import com.sanity.nil.exception.NoSuchElementFoundException;
-import com.sanity.nil.model.Role;
-import com.sanity.nil.model.RoleType;
 import com.sanity.nil.model.Surgery;
-import com.sanity.nil.model.User;
-import com.sanity.nil.repository.PetRepository;
 import com.sanity.nil.repository.SurgeryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.text.WordUtils;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static com.sanity.nil.common.Constants.*;
 
@@ -38,19 +22,18 @@ import static com.sanity.nil.common.Constants.*;
 @RequiredArgsConstructor
 public class SurgeryService {
 
-    private SurgeryRepository surgeryRepository;
-    private PetRepository petRepository;
-    private PetService petService;
+    private final SurgeryRepository surgeryRepository;
+    private final PetService petService;
+    private final UserService userService;
 
-    private SurgeryPetResponseMapper surgeryPetResponseMapper;
-    private SurgeryUserResponseMapper surgeryUserResponseMapper;
-    private SurgeryRequestMapper surgeryRequestMapper;
+    private final SurgeryResponseMapper surgeryResponseMapper;
+    private final SurgeryRequestMapper surgeryRequestMapper;
 
     /**
      * Fetches a single surgery (entity) by the given id
      *
      * @param id
-     * @return User
+     * @return Surgery
      */
     public Surgery getById(long id) {
         return surgeryRepository.findById(id)
@@ -61,12 +44,12 @@ public class SurgeryService {
      * Fetches all surgeries based on the given petId
      *
      * @param petId
-     * @return List of SurgeryPetResponse
+     * @return List of SurgeryResponse
      */
     @Transactional(readOnly = true)
-    public List<SurgeryPetResponse> findAllByPetId(Long petId) {
-        final List<SurgeryPetResponse> surgeries = surgeryRepository.findAllByPetId(petId).stream()
-                .map(surgeryPetResponseMapper::toDto).toList();
+    public List<SurgeryResponse> findAllByPetId(Long petId) {
+        final List<SurgeryResponse> surgeries = surgeryRepository.findAllByPetId(petId).stream()
+                .map(surgeryResponseMapper::toDto).toList();
 
         if (surgeries.isEmpty())
             throw new NoSuchElementFoundException(NOT_FOUND_RECORD);
@@ -77,12 +60,12 @@ public class SurgeryService {
      * Fetches all surgeries based on the given userId
      *
      * @param userId
-     * @return List of SurgeryPetResponse
+     * @return List of SurgeryResponse
      */
     @Transactional(readOnly = true)
-    public List<SurgeryUserResponse> findAllByUserId(Long userId) {
-        final List<SurgeryUserResponse> surgeries = surgeryRepository.findAllByUserId(userId).stream()
-                .map(surgeryUserResponseMapper::toDto).toList();
+    public List<SurgeryResponse> findAllByUserId(Long userId) {
+        final List<SurgeryResponse> surgeries = surgeryRepository.findAllByUserId(userId).stream()
+                .map(surgeryResponseMapper::toDto).toList();
 
         if (surgeries.isEmpty())
             throw new NoSuchElementFoundException(NOT_FOUND_RECORD);
@@ -97,44 +80,39 @@ public class SurgeryService {
      */
     public CommandResponse create(SurgeryRequest request) {
         final Surgery surgery = surgeryRequestMapper.toEntity(request);
-        surgery.setPet(petRepository.findById(request.getPetId()))
-        userRepository.save(user);
-        log.info(CREATED_USER);
-        return CommandResponse.builder().id(user.getId()).build();
+        surgery.setPet(petService.getById(request.getPetId()));
+        surgery.setUser(userService.getById(request.getUserId()));
+        surgeryRepository.save(surgery);
+        log.info(CREATED_SURGERY);
+        return CommandResponse.builder().id(surgery.getId()).build();
     }
 
     /**
-     * Updates user using the given request parameters
+     * Updates surgery using the given request parameters
      *
      * @param request
-     * @return id of the updated user
+     * @return id of the updated surgery
      */
-    public CommandResponse update(ProfileRequest request) {
-        final User user = userRepository.findById(request.getId())
+    public CommandResponse update(SurgeryRequest request) {
+        final Surgery surgery = surgeryRepository.findById(request.getId())
                 .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_USER));
-
-        // update admin role of the user based on the request
-        if (request.getRoles() != null && request.getRoles().contains(RoleType.ROLE_ADMIN.name()))
-            user.addRole(new Role(2L, RoleType.ROLE_ADMIN));
-        else
-            user.removeRole(new Role(2L, RoleType.ROLE_ADMIN));
-
-        user.setFirstName(WordUtils.capitalizeFully(request.getFirstName()));
-        user.setLastName(WordUtils.capitalizeFully(request.getLastName()));
-        userRepository.save(user);
-        log.info(UPDATED_USER);
-        return CommandResponse.builder().id(user.getId()).build();
+        surgery.setPet(petService.getById(request.getPetId()));
+        surgery.setUser(userService.getById(request.getUserId()));
+        surgery.setDate(request.getDate());
+        surgeryRepository.save(surgery);
+        log.info(UPDATED_SURGERY);
+        return CommandResponse.builder().id(surgery.getId()).build();
     }
 
     /**
-     * Deletes user by the given id
+     * Deletes surgery by the given id
      *
      * @param id
      */
     public void deleteById(long id) {
-        final User user = userRepository.findById(id)
+        final Surgery surgery = surgeryRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_USER));
-        userRepository.delete(user);
-        log.info(DELETED_USER);
+        surgeryRepository.delete(surgery);
+        log.info(DELETED_SURGERY);
     }
 }

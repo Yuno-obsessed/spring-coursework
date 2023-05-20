@@ -9,6 +9,7 @@ import com.sanity.nil.dto.response.PetInfoResponse;
 import com.sanity.nil.dto.response.PetResponse;
 import com.sanity.nil.exception.NoSuchElementFoundException;
 import com.sanity.nil.model.Pet;
+import com.sanity.nil.model.Type;
 import com.sanity.nil.repository.AnalysisRepository;
 import com.sanity.nil.repository.DiagnosisRepository;
 import com.sanity.nil.repository.PetRepository;
@@ -51,6 +52,17 @@ public class PetService {
         return petRepository.findById(id)
                 .map(petResponseMapper::toDto)
                 .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_PET));
+    }
+
+    /**
+     * Fetches a single pet (entity) by the given id
+     *
+     * @param id
+     * @return Pet
+     */
+    public Pet getById(long id) {
+        return petRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_TYPE));
     }
 
     /**

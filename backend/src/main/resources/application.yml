@@ -29,6 +29,7 @@ spring:
     enabled: true
     placeholderReplacement: false
     baseline-on-migrate: true
+    spring.flyway.validateOnMigrate: false
   mvc:
     throw-exception-if-no-handler-found: true
   servlet:
