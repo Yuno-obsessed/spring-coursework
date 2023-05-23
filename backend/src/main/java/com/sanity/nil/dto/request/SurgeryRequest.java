@@ -3,7 +3,7 @@ package com.sanity.nil.dto.request;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class SurgeryRequest {
@@ -19,5 +19,5 @@ public class SurgeryRequest {
     @Min(1)
     @Max(10)
     private Integer difficulty;
-    private Date date;
+    private LocalDate date;
 }

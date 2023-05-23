@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -12,6 +13,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "pet_analysis", schema = "public")
 public class Analysis {
 
     @Id
@@ -24,15 +26,11 @@ public class Analysis {
             sequenceName = "sequence_analysis",
             allocationSize = 5
     )
+    @Column(name = "analysis_id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(
-            name = "pet_id",
-            referencedColumnName = "id",
-            insertable = false,
-            updatable = false
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pet_id", referencedColumnName = "id", nullable = false)
     private Pet pet;
 
     @Column(name = "blood_rate")
@@ -43,4 +41,16 @@ public class Analysis {
 
     private LocalDate date;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Analysis analysis)) return false;
+        return getId() != null &&
+                Objects.equals(getId(), analysis.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

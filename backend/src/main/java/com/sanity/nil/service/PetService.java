@@ -4,9 +4,7 @@ import com.sanity.nil.dto.mapper.PetRequestMapper;
 import com.sanity.nil.dto.mapper.PetResponseMapper;
 import com.sanity.nil.dto.request.PetRequest;
 import com.sanity.nil.dto.request.TypeSetRequest;
-import com.sanity.nil.dto.response.CommandResponse;
-import com.sanity.nil.dto.response.PetInfoResponse;
-import com.sanity.nil.dto.response.PetResponse;
+import com.sanity.nil.dto.response.*;
 import com.sanity.nil.exception.NoSuchElementFoundException;
 import com.sanity.nil.model.Pet;
 import com.sanity.nil.model.Type;
@@ -20,6 +18,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,8 +35,8 @@ import static com.sanity.nil.common.Constants.*;
 public class PetService {
 
     private final PetRepository petRepository;
-    private final DiagnosisRepository diagnosisRepository;
-    private final AnalysisRepository analysisRepository;
+    private final DiagnosisService diagnosisService;
+    private final AnalysisService analysisService;
     private final TypeService typeService;
     private final UserService userService;
     private final PetRequestMapper petRequestMapper;
@@ -106,11 +106,15 @@ public class PetService {
     public PetInfoResponse getInfoById(Long id) {
         Pet pet = petRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementFoundException());
+        List<DiagnosisResponse> diagnosisList = new ArrayList<>(diagnosisService.findAllByPetId(id));
+        List<AnalysisResponse> analysisList = new ArrayList<>(analysisService.findAllByPetId(id));
+        diagnosisList.sort(Comparator.comparing(DiagnosisResponse::getDate));
+        analysisList.sort(Comparator.comparing(AnalysisResponse::getDate));
         return PetInfoResponse.builder()
                 .name(pet.getName())
-                .type(pet.getType())
-                .diagnosis(diagnosisRepository.findAllByPetId(id))
-                .analysis(analysisRepository.findAllByPetId(id))
+                .type(pet.getType().getName())
+                .diagnosis(diagnosisList)
+                .analysis(analysisList)
                 .build();
     }
 

@@ -52,7 +52,7 @@ public class SurgeryController {
     @PreAuthorize("hasRole(T(com.sanity.nil.model.RoleType).ROLE_USER)")
     @GetMapping("/user/{userId}")
     public ResponseEntity<ApiResponse<List<SurgeryResponse>>> findAllByUserId(@PathVariable long userId) {
-        final List<SurgeryResponse> response = surgeryService.findAllByPetId(userId);
+        final List<SurgeryResponse> response = surgeryService.findAllByUserId(userId);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
     }
 

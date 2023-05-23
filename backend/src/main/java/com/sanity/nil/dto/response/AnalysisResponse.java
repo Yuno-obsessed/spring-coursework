@@ -4,16 +4,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sanity.nil.model.Pet;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class AnalysisResponse {
 
-    private Long id;
-    private Pet pet;
+//    private Long id;
+//    private PetResponse pet;
     @JsonProperty(value = "blood_rate")
     private Float bloodRate;
     @JsonProperty(value = "urine_rate")
     private Float urineRate;
-    private Date date;
+    private LocalDate date;
 }

@@ -13,7 +13,7 @@ import java.util.List;
 public class PetInfoResponse {
 
     private String name;
-    private Type type;
-    private List<Diagnosis> diagnosis;
-    private List<Analysis> analysis;
+    private String type;
+    private List<DiagnosisResponse> diagnosis;
+    private List<AnalysisResponse> analysis;
 }
