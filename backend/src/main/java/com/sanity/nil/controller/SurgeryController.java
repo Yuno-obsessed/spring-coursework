@@ -2,12 +2,10 @@ package com.sanity.nil.controller;
 
 import com.sanity.nil.dto.request.AnalysisRequest;
 import com.sanity.nil.dto.request.SurgeryRequest;
-import com.sanity.nil.dto.response.AnalysisResponse;
-import com.sanity.nil.dto.response.ApiResponse;
-import com.sanity.nil.dto.response.CommandResponse;
-import com.sanity.nil.dto.response.SurgeryResponse;
+import com.sanity.nil.dto.response.*;
 import com.sanity.nil.service.AnalysisService;
 import com.sanity.nil.service.SurgeryService;
+import com.sanity.nil.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,6 +27,7 @@ public class SurgeryController {
 
     private final Clock clock;
     private final SurgeryService surgeryService;
+    private final UserService userService;
 
     /**
      * Fetches all surgeries based on the given petId
@@ -51,8 +50,10 @@ public class SurgeryController {
      */
     @PreAuthorize("hasRole(T(com.sanity.nil.model.RoleType).ROLE_USER)")
     @GetMapping("/user/{userId}")
-    public ResponseEntity<ApiResponse<List<SurgeryResponse>>> findAllByUserId(@PathVariable long userId) {
-        final List<SurgeryResponse> response = surgeryService.findAllByUserId(userId);
+    public ResponseEntity<ApiResponse<UserSurgeryResponse>> findAllByUserId(@PathVariable long userId) {
+        final List<SurgeryResponse> surgeries = surgeryService.findAllByUserId(userId);
+        final UserResponse user = userService.findById(userId);
+        final UserSurgeryResponse response = new UserSurgeryResponse(user, surgeries);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
     }
 
