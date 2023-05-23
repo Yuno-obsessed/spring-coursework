@@ -1,6 +1,42 @@
 version: '3.8'
 
 services:
+  frontend:
+    container_name: pet-clinic-frontend
+    build: ./frontend
+    restart: always
+    env_file: ./.env
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '100m'
+        max-file: '5'
+    volumes:
+      - ./frontend:/usr/src/app/frontend
+      - /usr/src/app/frontend/node_modules
+
+  backend:
+    container_name: pet-clinic-backend
+    build: ./backend
+    env_file: ./.env
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '100m'
+        max-file: '5'
   db:
     image: postgres:14.6-alpine
     restart: always
@@ -13,14 +49,5 @@ services:
       - '5432:5432'
     volumes:
       - ./backend/src/main/resources/db/migration:/docker-entrypoint-initdb.d
-    networks:
-      - pcbridge
-    expose:
-      - 5432
 volumes:
   db-data:
-    driver: local
-
-networks:
-  pcbridge:
-    driver: bridge
