@@ -53,11 +53,11 @@ public class DiagnosisService {
      */
     public CommandResponse create(DiagnosisRequest request){
         final Diagnosis diagnosis = Diagnosis.builder()
-                .pet(petRepository.findById(request.getId()).orElseThrow(
+                .pet(petRepository.findById(request.getPetId()).orElseThrow(
                         () -> new NoSuchElementFoundException(NOT_FOUND_PET)
                 ))
                 .description(request.getDescription())
-                .date(LocalDate.now())
+                .date(request.getDate())
                 .build();
         diagnosisRepository.save(diagnosis);
         log.info(CREATED_DIAGNOSIS);
@@ -75,11 +75,11 @@ public class DiagnosisService {
             throw new NoSuchElementFoundException(NOT_FOUND_DIAGNOSIS);
         }
         final Diagnosis diagnosis = Diagnosis.builder()
-                .pet(petRepository.findById(request.getId()).orElseThrow(
+                .pet(petRepository.findById(request.getPetId()).orElseThrow(
                         () -> new NoSuchElementFoundException(NOT_FOUND_PET)
                 ))
                 .description(request.getDescription())
-                .date(LocalDate.now())
+                .date(request.getDate())
                 .build();
         diagnosisRepository.save(diagnosis);
         log.info(UPDATED_DIAGNOSIS);

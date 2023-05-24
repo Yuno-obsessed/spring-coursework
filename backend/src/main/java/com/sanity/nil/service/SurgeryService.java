@@ -86,9 +86,8 @@ public class SurgeryService {
      * @return id of the created surgery
      */
     public CommandResponse create(SurgeryRequest request) {
-        final Surgery surgery = surgeryRequestMapper.toEntity(request);
+        Surgery surgery = surgeryRequestMapper.toEntity(request);
         surgery.setPet(petService.getById(request.getPetId()));
-        surgery.setDate(LocalDate.now());
         surgeryRepository.save(surgery);
         log.info(CREATED_SURGERY);
         return CommandResponse.builder().id(surgery.getId()).build();

@@ -52,12 +52,12 @@ public class AnalysisService {
      */
     public CommandResponse create(AnalysisRequest request){
        final Analysis analysis = Analysis.builder()
-               .pet(petRepository.findById(request.getId()).orElseThrow(
+               .pet(petRepository.findById(request.getPetId()).orElseThrow(
                        () -> new NoSuchElementFoundException(NOT_FOUND_ANALYSIS)
                ))
                .bloodRate(request.getBloodRate())
                .urineRate(request.getUrineRate())
-               .date(LocalDate.now())
+               .date(request.getDate())
                .build();
        analysisRepository.save(analysis);
        log.info(CREATED_ANALYSIS);
@@ -75,12 +75,12 @@ public class AnalysisService {
             throw new NoSuchElementFoundException(NOT_FOUND_ANALYSIS);
         }
         final Analysis analysis = Analysis.builder()
-                .pet(petRepository.findById(request.getId()).orElseThrow(
+                .pet(petRepository.findById(request.getPetId()).orElseThrow(
                         () -> new NoSuchElementFoundException()
                 ))
                 .bloodRate(request.getBloodRate())
                 .urineRate(request.getUrineRate())
-                .date(LocalDate.now())
+                .date(request.getDate())
                 .build();
         analysisRepository.save(analysis);
         log.info(UPDATED_ANALYSIS);
