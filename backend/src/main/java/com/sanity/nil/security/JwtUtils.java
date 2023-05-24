@@ -20,15 +20,15 @@ public class JwtUtils {
     @Value("${app.security.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${app.security.jwtExpirationMs}")
-    private int jwtExpirationMs;
+    @Value("${app.security.jwtExpirationM}")
+    private int jwtExpirationM;
 
     public String generateJwtToken(Authentication authentication) {
         final UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .setExpiration(new Date((new Date()).getTime() + jwtExpirationM * 36000))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }

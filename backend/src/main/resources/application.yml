@@ -68,4 +68,4 @@ exception:
 app:
   security:
     jwtSecret: ${JWT_SECRET}
-    jwtExpirationMs: 1800000
+    jwtExpirationM: 18000

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 @Data
 public class SurgeryResponse {
 
-//    private Long id;
+    private Long id;
 //    private PetResponse pet;
     private String name;
     private String description;

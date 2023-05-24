@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Data
 public class DiagnosisResponse {
 
-//    private Long id;
+    private Long id;
 //    private PetResponse pet;
     private String description;
     private LocalDate date;

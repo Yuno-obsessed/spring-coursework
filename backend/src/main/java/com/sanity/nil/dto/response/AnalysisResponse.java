@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 public class AnalysisResponse {
 
-//    private Long id;
+    private Long id;
 //    private PetResponse pet;
     @JsonProperty(value = "blood_rate")
     private Float bloodRate;
