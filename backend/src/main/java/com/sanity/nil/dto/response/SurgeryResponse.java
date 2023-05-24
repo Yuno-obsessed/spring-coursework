@@ -9,6 +9,7 @@ public class SurgeryResponse {
 
     private Long id;
 //    private PetResponse pet;
+    private Long petId;
     private String name;
     private String description;
     private Integer difficulty;

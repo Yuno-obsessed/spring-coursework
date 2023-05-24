@@ -9,6 +9,7 @@ import java.time.LocalDate;
 public class DiagnosisResponse {
 
     private Long id;
+    private Long petId;
 //    private PetResponse pet;
     private String description;
     private LocalDate date;

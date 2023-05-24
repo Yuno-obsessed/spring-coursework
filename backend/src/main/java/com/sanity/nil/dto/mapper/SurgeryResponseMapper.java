@@ -14,6 +14,7 @@ public interface SurgeryResponseMapper {
     Surgery toEntity(SurgeryResponse dto);
 
     @Mapping(source = "pet.name", target = "name")
+    @Mapping(source = "pet.id", target = "petId")
     SurgeryResponse toDto(Surgery entity);
 
 }
