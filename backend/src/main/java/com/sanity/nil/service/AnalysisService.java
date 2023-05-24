@@ -71,10 +71,11 @@ public class AnalysisService {
      * @return id of the updated analysis
      */
     public CommandResponse update(AnalysisRequest request){
-        if (analysisRepository.existsById(request.getId())){
+        if (!analysisRepository.existsById(request.getId())){
             throw new NoSuchElementFoundException(NOT_FOUND_ANALYSIS);
         }
         final Analysis analysis = Analysis.builder()
+                .id(request.getId())
                 .pet(petRepository.findById(request.getPetId()).orElseThrow(
                         () -> new NoSuchElementFoundException()
                 ))

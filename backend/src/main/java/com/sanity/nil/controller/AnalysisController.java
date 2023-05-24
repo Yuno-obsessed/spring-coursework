@@ -66,4 +66,18 @@ public class AnalysisController {
         final CommandResponse response = analysisService.update(request);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
     }
+
+    /**
+     *  Deletes analysis using id
+     *
+     * @param id
+     */
+    @PreAuthorize("hasRole(T(com.sanity.nil.model.RoleType).ROLE_USER)")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> deleteById(@PathVariable long id){
+        analysisService.deleteById(id);
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .build();
+    }
 }

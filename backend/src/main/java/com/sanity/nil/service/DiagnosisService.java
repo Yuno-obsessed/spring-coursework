@@ -71,10 +71,11 @@ public class DiagnosisService {
      * @return id of the updated diagnosis
      */
     public CommandResponse update(DiagnosisRequest request){
-        if (diagnosisRepository.existsById(request.getId())){
+        if (!diagnosisRepository.existsById(request.getId())){
             throw new NoSuchElementFoundException(NOT_FOUND_DIAGNOSIS);
         }
         final Diagnosis diagnosis = Diagnosis.builder()
+                .id(request.getId())
                 .pet(petRepository.findById(request.getPetId()).orElseThrow(
                         () -> new NoSuchElementFoundException(NOT_FOUND_PET)
                 ))

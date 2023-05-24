@@ -69,5 +69,19 @@ public class DiagnosisController {
         final CommandResponse response = diagnosisService.update(request);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
     }
+
+    /**
+     *  Deletes diagnosis using id
+     *
+     * @param id
+     */
+    @PreAuthorize("hasRole(T(com.sanity.nil.model.RoleType).ROLE_USER)")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> deleteById(@PathVariable long id){
+        diagnosisService.deleteById(id);
+        return ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .build();
+    }
 }
 
