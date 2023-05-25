@@ -7,5 +7,14 @@ INSERT INTO public.surgery (surgery_id, pet_id, description, difficulty, date) V
 INSERT INTO public.surgery (surgery_id, pet_id, description, difficulty, date) VALUES (7, 23, 'surgery_6', 6, CURRENT_DATE + INTERVAL '4 days');
 INSERT INTO public.surgery (surgery_id, pet_id, description, difficulty, date) VALUES (8, 23, 'surgery_6', 3, CURRENT_DATE + INTERVAL '7 days');
 INSERT INTO public.surgery (surgery_id, pet_id, description, difficulty, date) VALUES (9, 23, 'surgery_6', 1, CURRENT_DATE + INTERVAL '15 days');
+INSERT INTO public.surgery (surgery_id, pet_id, description, difficulty, date) VALUES (10, 12, 'surgery_7', 4, CURRENT_DATE - INTERVAL  '2 months');
+INSERT INTO public.surgery (surgery_id, pet_id, description, difficulty, date) VALUES (11, 12, 'surgery_8', 3, CURRENT_DATE - INTERVAL '7 days');
+INSERT INTO public.surgery (surgery_id, pet_id, description, difficulty, date) VALUES (12, 12, 'surgery_9', 6, CURRENT_DATE - INTERVAL '5 days');
+INSERT INTO public.surgery (surgery_id, pet_id, description, difficulty, date) VALUES (13, 13, 'surgery_10', 9, CURRENT_DATE - INTERVAL '3 days');
+INSERT INTO public.surgery (surgery_id, pet_id, description, difficulty, date) VALUES (14, 13, 'surgery_11', 2, CURRENT_DATE + INTERVAL '2 days');
+INSERT INTO public.surgery (surgery_id, pet_id, description, difficulty, date) VALUES (15, 13, 'surgery_12', 1, CURRENT_DATE + INTERVAL '1 day');
+INSERT INTO public.surgery (surgery_id, pet_id, description, difficulty, date) VALUES (16, 14, 'surgery_13', 6, CURRENT_DATE + INTERVAL '4 days');
+INSERT INTO public.surgery (surgery_id, pet_id, description, difficulty, date) VALUES (17, 14, 'surgery_14', 3, CURRENT_DATE + INTERVAL '7 days');
+INSERT INTO public.surgery (surgery_id, pet_id, description, difficulty, date) VALUES (18, 14, 'surgery_15', 1, CURRENT_DATE + INTERVAL '15 days');
 
 SELECT setval('sequence_surgery', max(surgery_id)) FROM public.surgery;
