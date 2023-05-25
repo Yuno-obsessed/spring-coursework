@@ -1,5 +1,6 @@
 package com.sanity.nil.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class SurgeryRequest {
     private String description;
     @Min(1)
     @Max(10)
+    @JsonProperty(value = "difficulty")
     private Integer difficulty;
     private LocalDate date;
 }

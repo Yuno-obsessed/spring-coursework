@@ -99,14 +99,16 @@ public class SurgeryService {
      * @param request
      * @return id of the updated surgery
      */
-    public CommandResponse update(SurgeryRequest request) {
-        final Surgery surgery = surgeryRepository.findById(request.getId())
-                .orElseThrow(() -> new NoSuchElementFoundException(NOT_FOUND_USER));
-        surgery.setPet(petService.getById(request.getPetId()));
-        surgery.setDate(request.getDate());
-        surgeryRepository.save(surgery);
+    public SurgeryResponse update(SurgeryRequest request) {
+        if (!surgeryRepository.existsById(request.getId())){
+            throw new NoSuchElementFoundException(NOT_FOUND_SURGERY);
+        }
+        Surgery newSurgery = surgeryRequestMapper.toEntity(request);
+        newSurgery.setPet(petService.getById(request.getPetId()));
+        surgeryRepository.save(newSurgery);
         log.info(UPDATED_SURGERY);
-        return CommandResponse.builder().id(surgery.getId()).build();
+        SurgeryResponse response = surgeryResponseMapper.toDto(newSurgery);
+        return response;
     }
 
     /**

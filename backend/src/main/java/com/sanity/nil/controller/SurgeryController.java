@@ -80,8 +80,8 @@ public class SurgeryController {
      */
     @PreAuthorize("hasRole(T(com.sanity.nil.model.RoleType).ROLE_USER)")
     @PutMapping
-    public ResponseEntity<ApiResponse<CommandResponse>> update(@Valid @RequestBody SurgeryRequest request) {
-        final CommandResponse response = surgeryService.update(request);
+    public ResponseEntity<ApiResponse<SurgeryResponse>> update(@Valid @RequestBody SurgeryRequest request) {
+        final SurgeryResponse response = surgeryService.update(request);
         return ResponseEntity.ok(new ApiResponse<>(Instant.now(clock).toEpochMilli(), SUCCESS, response));
     }
 
