@@ -1,5 +1,4 @@
 import axios from "./axios";
-
 const login = (body) => {
   const url = "/auth/login";
   return axios.post(url, body).then((response) => {
@@ -18,7 +17,6 @@ const signup = (body) => {
 const logout = () => {
   localStorage.removeItem("user");
 };
-
 const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };

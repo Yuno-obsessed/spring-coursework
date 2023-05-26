@@ -1,4 +1,4 @@
-import { Button, Grid, Stack, TextField } from "@mui/material";
+import { Button, Grid, Stack, TextField} from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ const EditProfile = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    HttpService.putWithAuth("/users/profile", formValues)
+    HttpService.putWithAuth("/api/v1/surgery", formValues)
       .then((response) => {
         enqueueSnackbar("User updated successfully", { variant: "success" });
         navigate("/profile");

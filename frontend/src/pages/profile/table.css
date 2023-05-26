@@ -1,0 +1,114 @@
+.table-container {
+    margin: 20px;
+}
+
+table {
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #eaeaea;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+thead th {
+    border-bottom: 1px solid #eaeaea;
+    font-size: 20px;
+    background-color: white;
+    font-weight: bold;
+    padding: 14px;
+    text-align: left;
+}
+
+tbody td {
+    font-size: 15px;
+    padding: 15px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+tbody tr {
+    transition: background-color 0.1s ease-in-out;
+}
+tbody tr:hover {
+    background-color: rgba(245, 245, 245, 0.5);
+}
+
+td .button {
+    text-decoration: none;
+    text-transform: none;
+    transition: opacity 0.1s ease-in-out;
+    font-weight: 500;
+    border-radius: 4px;
+    background: #57a7b3;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+}
+
+.gap {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+td .button:not(:last-child) {
+    background: #ea4848;
+    margin-right: 10px;
+}
+
+td .button:hover {
+    transform: scale(1.06);
+    opacity: 0.7;
+}
+td .button{
+    transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out;
+}
+
+.buttonAddNew{
+    transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out;
+    margin-bottom: 10px;
+    float: right;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    background: #54cc57;
+}
+.buttonAddNew:hover{
+    transform: scale(1.06);
+    opacity: 0.7;
+}
+.dataPicker{
+    color: #111111;
+    font-size: 16px;
+    border-radius: 5px;
+    border: rgba(17, 17, 17, 0.27) 1px solid;
+    width: 300px;
+    padding: 10px;
+    height: 35px;
+}
+input[type="date"] {
+    opacity: 0.5;
+}
+.petsIDs .petsID {
+    transition: transform 0.1s ease-in-out;
+    border-radius: 4px;
+    background: rgba(17, 17, 17, 0.15);
+    padding: 10px;
+    display: inline-flex;
+}
+.petsID:hover{
+    transform: scale(1.05);
+}
+.petsIDs .petsID:not(:first-child) {
+    margin-left: 15px;
+}
+.PetsId{
+    color: #57a7b3;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
