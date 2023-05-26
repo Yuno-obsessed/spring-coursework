@@ -23,6 +23,7 @@ const ListPet = () => {
   const [data, setData] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = useState(false);
+  console.log(data)
 
   useEffect(() => {
     fetchData();
