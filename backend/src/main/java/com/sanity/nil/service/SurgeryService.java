@@ -73,8 +73,6 @@ public class SurgeryService {
         List<SurgeryResponse> response = new ArrayList<>(surgeries.stream().filter(surgery -> surgery.getDate().isAfter(LocalDate.now()))
                 .map(surgeryResponseMapper::toDto).toList());
 
-        if (surgeries.isEmpty() || response.isEmpty())
-            throw new NoSuchElementFoundException(NOT_FOUND_RECORD);
         response.sort(Comparator.comparing(SurgeryResponse::getDate));
         return response;
     }
