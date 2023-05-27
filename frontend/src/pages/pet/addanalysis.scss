@@ -1,0 +1,19 @@
+.bottom .title-bottom{
+  font-size: 15px;
+  opacity: 0.5;
+  font-weight: normal;
+}
+.field {
+   fieldset{
+     border: 1px solid rgba(0, 0, 0, 0.15);
+     outline: none;
+   }
+}
+.grids{
+  width: 500px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 20px;
+}

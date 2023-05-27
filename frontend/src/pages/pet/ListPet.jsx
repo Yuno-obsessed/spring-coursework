@@ -23,7 +23,6 @@ const ListPet = () => {
   const [data, setData] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = useState(false);
-  console.log(data)
 
   useEffect(() => {
     fetchData();
@@ -63,6 +62,11 @@ const ListPet = () => {
     setOpen(false);
   };
 
+  const handleInfo = (params) => {
+    navigate("/pets/info", {state : params.row })
+
+  }
+
   const handleDelete = () => {
     HttpService.deleteWithAuth("/pets/" + id)
       .then((res) => {
@@ -95,13 +99,15 @@ const ListPet = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
+            <div className="infoButton" onClick={() => handleInfo(params)}>
+              Info
+            </div>
             <div className="editButton" onClick={() => handleEdit(params)}>
               Edit
             </div>
             <div
               className="deleteButton"
-              onClick={() => handleClickOpen(params.row.id)}
-            >
+              onClick={() => handleClickOpen(params.row.id)}>
               Delete
             </div>
           </div>
@@ -109,7 +115,6 @@ const ListPet = () => {
       },
     },
   ];
-
   return (
     <div className="list">
       <Sidebar />

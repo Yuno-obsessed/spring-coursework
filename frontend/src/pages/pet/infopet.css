@@ -1,0 +1,107 @@
+.userInfo{
+  display: flex;
+    align-items: center;
+
+}
+.userInfo img{
+    background: #57a7b3;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.detailItems{
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.item-detail{
+    font-size: 12px;
+    margin-left: 20px;
+    opacity: 0.4;
+}
+.itembold{
+    margin-left: 0px;
+    opacity: 0.6;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.analysis{
+    max-width: fit-content;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.analysis p{
+    transition: opacity 0.2s ease-in-out;
+    opacity: 0.5;
+    padding: 3px;
+    font-size: 14px;
+}
+.analis{
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.analysis h4{
+    transition: opacity 0.2s ease-in-out;
+    opacity: 0.7;
+}
+.analysis h4:hover{
+    opacity: 1;
+}
+.diagnosrow{
+    display: flex;
+    flex-direction: column;
+}
+.container:nth-child(1){
+    margin-top: 0px;
+}
+.container{
+    margin-top: 15px;
+}
+.analis{
+    margin-top:20px;
+    box-shadow: 0 0 20px rgba(17, 17, 17, 0.1);
+}
+.analis p:hover{
+    opacity: 1;
+    color: #111111;
+}
+.posEditBtn{
+    top: -60px;
+    right: -20px;
+   position: absolute;
+}
+.userInfo{
+    position: relative;
+}
+.btnRow{
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.btnRow button{
+    transition: transform 0.1s ease-in-out;
+    background: none;
+    margin-left: 10px;
+    border-radius: 5px;
+    color: goldenrod;
+    border: 1px dotted rgb(218, 165, 32, 0.6);
+    cursor: pointer;
+    padding: 8px 15px;
+}
+.btnRow button:nth-child(1){
+    color: #25be25;
+    border: 1px dotted #25be25;
+}
+.btnRow button:hover{
+    transform: scale(1.03);
+}
+.analis h2{
+    margin-top: 10px;
+    margin-bottom: 10px
+}
