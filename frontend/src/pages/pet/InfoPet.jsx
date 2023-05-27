@@ -17,6 +17,7 @@ function InfoPet() {
         },
         diagnosis: {}
     });
+    console.log(state.id)
     React.useEffect(() => {
         HttpService.getWithAuth(`/pets/info/${state.id}`)
             .then((res) => {
@@ -60,6 +61,7 @@ function InfoPet() {
                   <h1 className="title">{pageTitle}</h1>
                   <div className="userInfo">
                       <img
+                          src={`${process.env.PUBLIC_URL}/petsImg/pet${state.id}.jpg`}
                           alt="pet"
                       />
                       <div className="detail">

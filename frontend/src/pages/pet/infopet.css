@@ -4,7 +4,6 @@
 
 }
 .userInfo img{
-    background: #57a7b3;
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -16,7 +15,6 @@
 }
 .item-detail{
     font-size: 12px;
-    margin-left: 20px;
     opacity: 0.4;
 }
 .itembold{

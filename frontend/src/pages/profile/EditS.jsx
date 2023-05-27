@@ -46,10 +46,11 @@ function EditS(){
            "userId": AuthService.getCurrentUser()?.id,
            "petId": surgeries.petId,
            "description": description,
-           "difficulty:": difficulty,
+           "difficulty": difficulty,
            "date": date
        })
            .then((res) => {
+               console.log(difficulty)
                enqueueSnackbar("Surgery updated successfully", { variant: "success" });
                navigate('/profile')
            })
