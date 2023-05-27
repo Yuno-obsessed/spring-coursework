@@ -1,12 +1,11 @@
 .datatable {
-  height: 600px;
+  height: 500px;
   padding: 20px;
 
   .MuiDataGrid-columnHeaders,
   .MuiDataGrid-row {
     padding-left: 15px;
   }
-
   .datatableTitle {
     width: 100%;
     font-size: 24px;
@@ -62,7 +61,7 @@
   .cellAction {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 6px;
 
     .viewButton {
       padding: 2px 5px;
@@ -85,6 +84,13 @@
       border-radius: 5px;
       color: crimson;
       border: 1px dotted rgba(220, 20, 60, 0.6);
+      cursor: pointer;
+    }
+    .infoButton{
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #0dcfe1;
+      border: 1px dotted #0dcfe1;
       cursor: pointer;
     }
   }

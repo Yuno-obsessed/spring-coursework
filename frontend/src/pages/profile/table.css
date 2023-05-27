@@ -37,25 +37,24 @@ tbody tr:hover {
 }
 
 td .button {
-    text-decoration: none;
-    text-transform: none;
-    transition: opacity 0.1s ease-in-out;
-    font-weight: 500;
-    border-radius: 4px;
-    background: #57a7b3;
-    border: none;
-    color: white;
-    padding: 10px 25px;
+    background: none;
+    border-radius: 5px;
+    color: goldenrod;
+    border: 1px dotted rgb(218, 165, 32, 0.6);
+    cursor: pointer;
+    padding: 5px 15px;
 }
 
 .gap {
     display: flex;
-    gap: 20px;
+    gap: 13px;
     align-items: center;
 }
 
 td .button:not(:last-child) {
-    background: #ea4848;
+    background: none;
+    color: rgba(245, 17, 17, 0.86);
+    border: 1px dotted rgba(245, 17, 17, 0.86);
     margin-right: 10px;
 }
 
@@ -71,11 +70,11 @@ td .button{
     transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out;
     margin-bottom: 10px;
     float: right;
-    color: white;
-    border: none;
-    padding: 10px 25px;
+    color: #54cc57;
+    border: 1px solid #54cc57;
+    padding: 7px 20px;
     border-radius: 5px;
-    background: #54cc57;
+    background: none;
 }
 .buttonAddNew:hover{
     transform: scale(1.06);

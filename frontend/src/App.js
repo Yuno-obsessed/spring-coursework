@@ -19,6 +19,8 @@ import RoleAccess from "./RoleAccess";
 import "./style/dark.scss";
 import AddS from "./pages/profile/AddS";
 import InfoPet from "./pages/pet/InfoPet";
+import AddAnalysis from "./pages/pet/AddAnalysis";
+import AddDiagnosis from "./pages/pet/AddDiagnosis";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -50,6 +52,8 @@ function App() {
               <Route element={<RoleAccess roles={["ROLE_USER"]} />} >
                 <Route path="edit" element={<EditPet />} />
                 <Route path="info" element={<InfoPet />} />
+                <Route path="info/addanalysis" element={<AddAnalysis />} />
+                <Route path="info/AddDiagnosis" element={<AddDiagnosis />} />
               </Route>
             </Route>
 

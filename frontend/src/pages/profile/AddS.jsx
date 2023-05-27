@@ -31,11 +31,11 @@ function AddS(props) {
     const { enqueueSnackbar } = useSnackbar();
     const surgeries = location.state;
 
-    const filteredPets = pets.filter((pet) => {
-        return !surgeries.some((surgery) => surgery.petId === pet.id);
-    });
+   // const filteredPets = pets.filter((pet) => {  // if you wanna filter
+     //   return !surgeries.some((surgery) => surgery.petId === pet.id);
+   // });
 
-    const finalPets = filteredPets.length > 0 ? filteredPets : pets;
+  //  const finalPets = filteredPets.length > 0 ? filteredPets : pets;
 
 
     const handleId = (petId) => {
@@ -49,7 +49,6 @@ function AddS(props) {
             [inputType]: value,
              petId: activeId
         }));
-
     };
    const handleSubmit = (event) => {
        HttpService.postWithAuth("/surgery", formValues)
@@ -87,7 +86,7 @@ function AddS(props) {
                             <h3 className='PetsId'>Pets id</h3>
                             <div className="petsIDs">
                             {
-                                finalPets.map((pet) => (
+                                pets.map((pet) => (
                                     <p
                                         key={pet.id}
                                         onClick={(e) => {

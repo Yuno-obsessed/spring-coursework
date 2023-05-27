@@ -25,14 +25,12 @@ const Profile = () => {
 
   useEffect(() => {
     const userId = AuthService.getCurrentUser()?.id;
-
     HttpService.getWithAuth(`/surgery/user/${userId}`)
         .then((response) => {
-          setUser(response.data.user);
           setSurgeries(response.data.surgeries);
-        })
+          setUser(response.data.user);})
       .catch((error) => {
-
+        setUser(AuthService.getCurrentUser())
         if (error.response?.data?.errors) {
           error.response?.data?.errors.map((e) =>
             enqueueSnackbar(e.field + " " + e.message, { variant: "error" })
@@ -45,6 +43,7 @@ const Profile = () => {
       });
   }, [update]);
   const handleDelete = (id) => {
+
     HttpService.deleteWithAuth(`/surgery/${id}`)
         .then((res) => {
           setUpdate(!update)
